@@ -14,6 +14,11 @@ jobs:
         with:
           channel: stable
       - run: flutter pub get
+      - run: flutter pub add --dev flutter_launcher_icons
+      - name: Crear configuracion del icono
+        run: |
+          printf 'flutter_launcher_icons:\n  android: true\n  ios: false\n  image_path: "wtech-icono.png"\n' > flutter_launcher_icons.yaml
+      - run: dart run flutter_launcher_icons
       - run: flutter build apk --debug
       - uses: actions/upload-artifact@v4
         with:
