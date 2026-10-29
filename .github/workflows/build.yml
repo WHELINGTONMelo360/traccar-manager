@@ -19,6 +19,8 @@ jobs:
         run: |
           printf 'flutter_launcher_icons:\n  android: true\n  ios: false\n  image_path: "wtech-icono.png"\n' > flutter_launcher_icons.yaml
       - run: dart run flutter_launcher_icons
+      - name: Quitar iconos adaptativos viejos
+        run: find android/app/src/main/res -path '*anydpi*' -name 'ic_launcher*' -delete
       - run: flutter build apk --debug
       - uses: actions/upload-artifact@v4
         with:
